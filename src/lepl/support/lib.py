@@ -311,3 +311,17 @@ def add_defaults(original, defaults, prefix=''):
             original[prefix + name] = value
     return original
 
+
+class UnimplementedMethod(Exception):
+    '''
+    Raised when an "abstract" method is not implemented.
+    '''
+
+
+def unimplemented(method):
+    '''
+    A decorator that raise an error if the (abstract) method is called.
+    '''
+    def replacement(*args, **kargs):
+        raise UnimplementedMethod(method)
+    return replacement
